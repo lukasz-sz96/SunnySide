@@ -12,7 +12,7 @@ React.js app made with Gatsby
     npm install
     ```
 
-1.  **Start developing.**
+1.  **Launch development server.**
     ```shell
     gatsby develop
     ```
