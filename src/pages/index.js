@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "gatsby"
 
+import './main.css'
 import SEO from "../components/seo"
 import { getWeather } from "../utils/getWeather"
 
