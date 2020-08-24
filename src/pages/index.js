@@ -24,6 +24,10 @@ const IndexPage = () => {
     })
   }
 
+  const readDate = (dt) => {
+    return new Date(dt).toLocaleDateString("en-US", { weekday: 'long', hour: '2-digit' })
+  }
+
   return (
     <div>
       <SEO title="Home" />
@@ -44,8 +48,9 @@ const IndexPage = () => {
             </div>
             <div className="bottomView">
               {weather.list.slice(0, 5).map(el => (
-                <ForecastBox>
-                  {el.main.temp}
+                <ForecastBox key={el.dt}>
+                  <h3>{new Date(el.dt * 1000).toLocaleDateString("en-US", { weekday: 'long', hour: '2-digit' })}</h3>
+                  <span>Temperature: {el.main.temp}</span>
                 </ForecastBox>
               ))}
             </div>

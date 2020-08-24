@@ -16,7 +16,7 @@ const StyledDiv = styled(motion.div)`
 const ForecastBox = props => {
   const [variant, setVariant] = useState("show")
   const container = {
-    hidden: { y: "-100px", opacity: 0 },
+    hidden: { y: "100px", opacity: 0 },
     show: {
       y: "0px",
       opacity: 1,
