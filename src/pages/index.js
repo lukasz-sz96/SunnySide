@@ -1,35 +1,64 @@
 import React, { useEffect, useState } from "react"
-import { Link } from "gatsby"
 
-import './main.css'
+import GlobalStyle from "../GlobalStyle"
 import SEO from "../components/seo"
 import { getWeather } from "../utils/getWeather"
+import SearchBar from "../components/SearchBar"
+import ForecastBox from "../components/ForecastBox"
 
 const IndexPage = () => {
+  const [city, setCity] = useState()
   const [weather, setWeather] = useState()
 
-  const handleInput = e => {
-    if (e.keyCode == 13) {
-      getWeather(e.target.value).then(data => {
-        if (data) {
-          setWeather(data)
-        }
-      })
-    }
+  const handleSubmit = e => {
+    e.preventDefault()
+    e.stopPropagation()
+    console.log("ww " + city)
+    getWeather(city).then(data => {
+      console.log(data)
+      if (data.cod == "200") {
+        setWeather(data)
+      } else {
+        alert(data.message)
+      }
+    })
+  }
+
+  const readDate = (dt) => {
+    return new Date(dt).toLocaleDateString("en-US", { weekday: 'long', hour: '2-digit' })
   }
 
   return (
     <div>
       <SEO title="Home" />
-      <input type="text" placeholder="Input city name" onKeyDown={handleInput} />
-      {weather ? (
-        <div>
-          <h2>{weather.name}</h2>
-          <h2>Temperature: {weather.main.temp}</h2>
+      <GlobalStyle />
+      <div className="wrapper">
+        <div className="searchBar">
+          <form onSubmit={handleSubmit}>
+            <SearchBar type="text" onChange={e => setCity(e.target.value)} />
+          </form>
         </div>
-      ) : (
-        <h2>No data</h2>
-      )}
+        {weather ? (
+          <>
+            <div className="topView">
+              <div>
+                <h2>{weather.city.name}</h2>
+                <p>Temperature: {weather.list[0].main.temp} C</p>
+              </div>
+            </div>
+            <div className="bottomView">
+              {weather.list.slice(0, 5).map(el => (
+                <ForecastBox key={el.dt}>
+                  <h3>{new Date(el.dt * 1000).toLocaleDateString("en-US", { weekday: 'long', hour: '2-digit' })}</h3>
+                  <span>Temperature: {el.main.temp}</span>
+                </ForecastBox>
+              ))}
+            </div>
+          </>
+        ) : (
+          <h1>w</h1>
+        )}
+      </div>
     </div>
   )
 }
