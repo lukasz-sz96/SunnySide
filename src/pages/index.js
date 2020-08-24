@@ -24,9 +24,6 @@ const IndexPage = () => {
     })
   }
 
-  const readDate = (dt) => {
-    return new Date(dt).toLocaleDateString("en-US", { weekday: 'long', hour: '2-digit' })
-  }
 
   return (
     <div>
