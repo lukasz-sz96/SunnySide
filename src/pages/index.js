@@ -5,6 +5,7 @@ import SEO from "../components/seo"
 import { getWeather } from "../utils/getWeather"
 import SearchBar from "../components/SearchBar"
 import ForecastBox from "../components/ForecastBox"
+import Sunny from "../components/Sunny"
 
 const IndexPage = () => {
   const [city, setCity] = useState()
@@ -24,10 +25,6 @@ const IndexPage = () => {
     })
   }
 
-  const readDate = (dt) => {
-    return new Date(dt).toLocaleDateString("en-US", { weekday: 'long', hour: '2-digit' })
-  }
-
   return (
     <div>
       <SEO title="Home" />
@@ -42,21 +39,27 @@ const IndexPage = () => {
           <>
             <div className="topView">
               <div>
+                <Sunny />
                 <h2>{weather.city.name}</h2>
                 <p>Temperature: {weather.list[0].main.temp} C</p>
               </div>
             </div>
             <div className="bottomView">
-              {weather.list.slice(0, 5).map(el => (
-                <ForecastBox key={el.dt}>
-                  <h3>{new Date(el.dt * 1000).toLocaleDateString("en-US", { weekday: 'long', hour: '2-digit' })}</h3>
-                  <span>Temperature: {el.main.temp}</span>
+              {weather.list.slice(1, 6).map((el, index) => (
+                <ForecastBox variant="show" key={`ForecastBox_${index}`}>
+                  <h3>
+                    {new Date(el.dt * 1000).toLocaleDateString("en-EN", {
+                      weekday: "long",
+                      hour: "2-digit",
+                    })}
+                  </h3>
+                  <span>Temperature: {el.main.temp} C</span>
                 </ForecastBox>
               ))}
             </div>
           </>
         ) : (
-          <h1>w</h1>
+          <h2>No data</h2>
         )}
       </div>
     </div>

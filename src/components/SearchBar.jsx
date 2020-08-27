@@ -5,7 +5,7 @@ padding: 0.5em;
 background: white;
 border: 5px 5px 5px black;
 border-radius: 3px;
-width: 100%
+width: 100vh;
 `;
 
 export default SearchBar

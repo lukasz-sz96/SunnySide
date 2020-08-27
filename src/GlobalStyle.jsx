@@ -12,31 +12,32 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .searchBar {
-  align-self: center;
-  justify-self: stretch;
-  grid-area: searchBar;
-}
-.topView {
-  align-self: center;
-  justify-self: center;
-  grid-area: topView;
-}
-.bottomView {
-  align-self: end;
-  grid-area: bottomView;
-}
+    align-self: center;
+    justify-self: center;
+    grid-area: searchBar;
+  }
+  .topView {
+    align-self: center;
+    justify-self: center;
+    grid-area: topView;
+  }
+  .bottomView {
+    justify-self: center;
+    align-self: end;
+    grid-area: bottomView;
+  }
 
-.wrapper {
-  width: 100%;
-  height: 100vh;
-  display: grid;
-  /* grid-template-columns: 50px 50px 50px 50px; */
-  grid-template-rows: 33.33% 33.33% 33.33%;
-  grid-template-areas:
-    "topView topView topView topView topView"
-    ". . searchBar . ."
-    "bottomView bottomView bottomView bottomView bottomView";
-}
+  .wrapper {
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    /* grid-template-columns: 50px 50px 50px 50px; */
+    grid-template-rows: 33.33% 33.33% 33.33%;
+    grid-template-areas:
+      "topView topView topView topView topView"
+      ". searchBar searchBar searchBar ."
+      "bottomView bottomView bottomView bottomView bottomView";
+  }
 `
 
 export default GlobalStyle
