@@ -18,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
   }
   .topView {
     align-self: center;
-    justify-self: center;
+    justify-self: right;
     grid-area: topView;
   }
   .bottomView {
@@ -34,7 +34,7 @@ const GlobalStyle = createGlobalStyle`
     /* grid-template-columns: 50px 50px 50px 50px; */
     grid-template-rows: 33.33% 33.33% 33.33%;
     grid-template-areas:
-      "topView topView topView topView topView"
+      "topView topView topView . ."
       ". searchBar searchBar searchBar ."
       "bottomView bottomView bottomView bottomView bottomView";
   }
