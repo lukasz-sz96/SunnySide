@@ -1,20 +1,20 @@
 import styled from "styled-components"
 import { motion } from "framer-motion"
-import React, { useState } from "react"
+import React from "react"
 
 const StyledDiv = styled(motion.div)`
   display: inline-block;
   padding: 0.45em;
-  margin: 0.5em;
+  //margin: 0.5em;
   background: white;
   border: 1px solid black;
   border-radius: 3px;
-  width: auto;
+  width: 15%;
   overflow: hidden;
 `
 
 const ForecastBox = props => {
-  const {variant} = props
+  const { variant } = props
 
   const containerAnim = {
     hide: { y: "100px", opacity: 0 },
@@ -49,4 +49,3 @@ const ForecastBox = props => {
 }
 
 export default ForecastBox
-

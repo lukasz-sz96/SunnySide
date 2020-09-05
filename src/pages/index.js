@@ -1,28 +1,33 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 
 import GlobalStyle from "../GlobalStyle"
 import SEO from "../components/seo"
 import { getWeather } from "../utils/getWeather"
 import SearchBar from "../components/SearchBar"
 import ForecastBox from "../components/ForecastBox"
+import Button from "../components/Button"
 import Sunny from "../components/Sunny"
 
 const IndexPage = () => {
   const [city, setCity] = useState()
   const [weather, setWeather] = useState()
+  const [show, setShow] = useState(7)
 
   const handleSubmit = e => {
     e.preventDefault()
     e.stopPropagation()
-    console.log("ww " + city)
     getWeather(city).then(data => {
       console.log(data)
-      if (data.cod == "200") {
+      if (data.cod === "200") {
         setWeather(data)
       } else {
         alert(data.message)
       }
     })
+  }
+
+  const handleClick = () => {
+    setShow(19)
   }
 
   return (
@@ -45,21 +50,32 @@ const IndexPage = () => {
               </div>
             </div>
             <div className="bottomView">
-              {weather.list.slice(1, 6).map((el, index) => (
-                <ForecastBox variant="show" key={`ForecastBox_${index}`}>
-                  <h3>
-                    {new Date(el.dt * 1000).toLocaleDateString("en-EN", {
-                      weekday: "long",
-                      hour: "2-digit",
-                    })}
-                  </h3>
-                  <span>Temperature: {el.main.temp} C</span>
-                </ForecastBox>
-              ))}
+              <div className="btnExpand">
+                <Button
+                  onClick={e => {
+                    handleClick(e)
+                  }}
+                >
+                  Show more
+                </Button>
+              </div>
+              <div className="boxes">
+                {weather.list.slice(1, show).map((el, index) => (
+                  <ForecastBox variant="show" key={`ForecastBox_${index}`}>
+                    <h3>
+                      {new Date(el.dt * 1000).toLocaleDateString("en-EN", {
+                        weekday: "long",
+                        hour: "2-digit",
+                      })}
+                    </h3>
+                    <span>Temperature: {el.main.temp} C</span>
+                  </ForecastBox>
+                ))}
+              </div>
             </div>
           </>
         ) : (
-          <h2>No data</h2>
+          <h2 className="topView">No data</h2>
         )}
       </div>
     </div>

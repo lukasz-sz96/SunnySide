@@ -1,12 +1,9 @@
-import { useStaticQuery, graphql } from "gatsby"
-
+const API_URL = `https://api.openweathermap.org/data/2.5/forecast?q=`
 const API_KEY = `your_api_key`
+const units = `metric` // 'metric' or 'imperial'
 
 export const getWeather = async city => {
-  const request = fetch(
-    `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`
-  )
+  const request = fetch(`${API_URL}${city}&appid=${API_KEY}&units=${units}`)
   const response = await request
-  const json = await response.json()
-  return json
+  return await response.json()
 }
