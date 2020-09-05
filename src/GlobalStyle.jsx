@@ -25,18 +25,27 @@ const GlobalStyle = createGlobalStyle`
     justify-self: center;
     align-self: end;
     grid-area: bottomView;
+    max-width: 80%;
+  }
+  
+  .btnExpand {
+    text-align: center;
   }
 
   .wrapper {
-    width: 100%;
+    width: 100vw;
     height: 100vh;
+    min-width: 850px;
     display: grid;
-    /* grid-template-columns: 50px 50px 50px 50px; */
-    grid-template-rows: 33.33% 33.33% 33.33%;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    //grid-template-columns: 1fr fit-content(20%)
+    //1fr fit-content(20%)
+    //1fr fit-content(20%);
     grid-template-areas:
-      "topView topView topView . ."
-      ". searchBar searchBar searchBar ."
-      "bottomView bottomView bottomView bottomView bottomView";
+      ". topView ."
+      ". searchBar ."
+      "bottomView bottomView bottomView";
   }
 `
 
